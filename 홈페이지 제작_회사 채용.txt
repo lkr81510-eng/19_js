@@ -1,0 +1,81 @@
+<회사 홈페이지_홈 모집요강 지원 About>
+
+0. 1차 작업
+
+ 1) 문서에 디렉토리 만들기
+ 2) 터미널로 가기
+ 3) code .
+ 4) index.html 
+    css 
+      style.css
+   
+
+1. 2차 작업
+
+
+2) claude code
+
+https://www.skax.co.kr/
+---
+
+홈·모집요강·지원·About 4개 페이지에 공통 메뉴를 붙인 HTML/CSS 템플릿을 바로 만들어줘
+
+회사명과 업종은
+
+회사명 : MoveAX (무브에이엑스)
+          AI·자동화 기반 스마트 물류
+          "주문부터 도착까지, AI가 움직이는 물류"
+
+업종 : 물류
+
+모집 직무 : 운영관리, 물류 IT 개발, 배차, 영업, 현장 관리자).
+
+
+홈: 첫 화면에 한 줄 메시지와 버튼 하나만 두고, 아래로 회사 소개, 사업, 채용 순서로 이어지는지
+모집요강: 직무별 카드 또는 목록에 마감일, 자격요건, 우대사항이 있는지
+지원: 지원서 양식이 짧고 단계가 단순한지
+About: 연혁, 비전, 조직, 오시는 길을 어떻게 나눴는지
+
+
+3) 실행
+
+ㅁ idex.html 오른쪽 마우스 open with live server 
+ㅁ Web /port 연결
+  -  http://127.0.0.1:5500
+
+4. 새 저장소(Repository) 만들기
+
+1) GitHub 우측 상단 + 좌측 상단 (=) 버튼 클릭하고 
+  All repository 클릭하고 New repository를 선택
+   
+2) Repository name 작성 [ company_recurit ]
+   
+   Repository name에 python_practice를 입력합니다
+
+3) Public(공개)을 선택합니다
+4) 나머지는 체크하지 않고 Create repository를 클릭합니다
+
+
+3. github에 올리기
+
+1) git init (아래 채팅창에)
+2) git add .
+3) git commit -m "무대기획행사"
+4) git remote add origin https://github.com/lkr81510-eng/Stage-plan.git
+  - git에 가장 긴 주소
+    (https://github.com/lkr81510-eng/Stage-plan.git)
+5) git push -u origin master  
+
+6) github (stage-plan)에 가서
+   F5(배포)
+   settings 클릭, page 클릭, 
+   Branch의 master클릭, save 클릭, 
+   잠시후
+   새로고침
+
+7) Your site is live at https://lkr81510-eng.github.io/Stage-plan/
+   누름
+
+5. 과제 올리기
+
+ㅁ https://lkr81510-eng.github.io/company_recurit/

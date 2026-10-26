@@ -1,0 +1,162 @@
+:root {
+  --navy: #0b1b3a;
+  --blue: #1f5bff;
+  --cyan: #19c3e6;
+  --bg: #ffffff;
+  --soft: #f3f6fb;
+  --text: #1a2233;
+  --muted: #5d6879;
+  --line: #e1e7f0;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  word-break: keep-all;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+.container { width: min(1120px, 100% - 40px); margin: 0 auto; }
+
+/* ---------- 공통 메뉴 ---------- */
+.header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.logo { font-size: 1.4rem; font-weight: 800; color: var(--navy); letter-spacing: -.5px; }
+.logo span { color: var(--blue); }
+.menu { display: flex; gap: 6px; }
+.menu a { padding: 8px 16px; border-radius: 999px; font-weight: 600; color: var(--muted); transition: .2s; }
+.menu a:hover { color: var(--blue); }
+.menu a.active { color: #fff; background: var(--blue); }
+
+/* ---------- 버튼 ---------- */
+.btn {
+  display: inline-block; padding: 14px 32px; border: 0; border-radius: 999px;
+  background: var(--blue); color: #fff; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: .2s;
+}
+.btn:hover { background: #1647cc; transform: translateY(-2px); }
+.btn.full { width: 100%; border-radius: var(--radius); }
+
+/* ---------- 섹션 ---------- */
+.section { padding: 96px 0; }
+.section.soft { background: var(--soft); }
+.eyebrow { color: var(--blue); font-weight: 700; font-size: .9rem; letter-spacing: 1px; margin-bottom: 8px; }
+.title { font-size: 2rem; font-weight: 800; color: var(--navy); letter-spacing: -.5px; margin-bottom: 16px; }
+.lead { color: var(--muted); max-width: 640px; }
+.page-head { padding: 72px 0 40px; background: var(--soft); }
+.page-head h1 { font-size: 2.4rem; color: var(--navy); font-weight: 800; }
+.page-head p { color: var(--muted); margin-top: 8px; }
+
+/* ---------- 홈: 히어로 ---------- */
+.hero {
+  min-height: calc(100vh - 68px);
+  display: flex; align-items: center; text-align: center; color: #fff;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(25, 195, 230, .35), transparent 45%),
+    linear-gradient(135deg, var(--navy), #12306b 70%, var(--blue));
+}
+.hero h1 { font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.3; letter-spacing: -1px; margin-bottom: 36px; }
+.hero .btn { background: #fff; color: var(--navy); }
+.hero .btn:hover { background: var(--cyan); color: var(--navy); }
+
+/* ---------- 홈: 소개 / 사업 / 채용 ---------- */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.stat { background: var(--soft); border-radius: var(--radius); padding: 28px; }
+.stat b { display: block; font-size: 2rem; color: var(--blue); }
+.stat span { color: var(--muted); font-size: .95rem; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
+.card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 28px; transition: .2s;
+}
+.card:hover { box-shadow: 0 10px 30px rgba(11, 27, 58, .08); transform: translateY(-4px); }
+.card .icon { font-size: 2rem; margin-bottom: 12px; }
+.card h3 { color: var(--navy); margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: .95rem; }
+
+.cta-band { background: var(--navy); color: #fff; text-align: center; padding: 80px 0; }
+.cta-band h2 { font-size: 1.9rem; margin-bottom: 12px; }
+.cta-band p { color: #b9c4dc; margin-bottom: 28px; }
+.cta-band .btn { background: var(--cyan); color: var(--navy); }
+
+/* ---------- 모집요강 ---------- */
+.jobs { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+.job { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; }
+.job-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.tag { background: #e8efff; color: var(--blue); font-size: .8rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+.dday { font-size: .85rem; font-weight: 700; color: #e5484d; }
+.job h3 { font-size: 1.3rem; color: var(--navy); margin-bottom: 4px; }
+.deadline { color: var(--muted); font-size: .9rem; margin-bottom: 16px; }
+.job h4 { font-size: .9rem; color: var(--blue); margin: 12px 0 4px; }
+.job li { position: relative; padding-left: 14px; font-size: .93rem; color: var(--text); }
+.job li::before { content: "·"; position: absolute; left: 2px; font-weight: 900; }
+.job .btn { margin-top: auto; text-align: center; padding: 12px; border-radius: 10px; }
+.job .spacer { flex: 1; min-height: 20px; }
+
+/* ---------- 지원 ---------- */
+.steps { display: flex; gap: 12px; margin-bottom: 32px; }
+.step { flex: 1; text-align: center; padding: 12px; border-radius: 10px; background: var(--soft); color: var(--muted); font-weight: 600; font-size: .9rem; }
+.step.on { background: var(--blue); color: #fff; }
+.form { width: min(560px, 100% - 40px); margin: 48px auto 96px; }
+.field { margin-bottom: 20px; }
+.field label { display: block; font-weight: 700; margin-bottom: 6px; font-size: .95rem; }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: 10px;
+  font: inherit; background: #fff;
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--blue); border-color: transparent; }
+.agree { display: flex; gap: 8px; align-items: center; font-size: .9rem; color: var(--muted); margin-bottom: 24px; }
+.done { display: none; text-align: center; padding: 48px 20px; background: var(--soft); border-radius: var(--radius); }
+.done h2 { color: var(--navy); margin-bottom: 8px; }
+
+/* ---------- About ---------- */
+.subnav { position: sticky; top: 68px; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+.subnav .container { display: flex; gap: 8px; overflow-x: auto; }
+.subnav a { padding: 14px 18px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.subnav a:hover { color: var(--blue); }
+.about-sec { scroll-margin-top: 130px; }
+.values { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 32px; }
+.quote { font-size: 1.5rem; font-weight: 700; color: var(--navy); border-left: 4px solid var(--blue); padding-left: 20px; margin-bottom: 8px; }
+
+.timeline { margin-top: 32px; border-left: 3px solid var(--line); padding-left: 28px; }
+.tl-item { position: relative; margin-bottom: 28px; }
+.tl-item::before { content: ""; position: absolute; left: -37px; top: 8px; width: 13px; height: 13px; border-radius: 50%; background: var(--blue); }
+.tl-item b { color: var(--blue); font-size: 1.1rem; }
+.tl-item p { color: var(--muted); }
+
+.org { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-top: 32px; }
+.org .ceo { grid-column: 1 / -1; text-align: center; background: var(--navy); color: #fff; padding: 18px; border-radius: var(--radius); font-weight: 700; }
+.org .team { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; text-align: center; font-weight: 600; color: var(--navy); }
+.org .team small { display: block; color: var(--muted); font-weight: 400; }
+
+.map {
+  margin-top: 28px; height: 280px; border-radius: var(--radius);
+  background: repeating-linear-gradient(45deg, #e8efff, #e8efff 14px, #f3f6fb 14px, #f3f6fb 28px);
+  display: flex; align-items: center; justify-content: center; color: var(--muted); font-weight: 600;
+}
+.info li { padding: 6px 0; }
+.info b { display: inline-block; width: 70px; color: var(--navy); }
+
+/* ---------- 푸터 ---------- */
+.footer { background: #08132b; color: #8e9bb8; padding: 40px 0; font-size: .9rem; }
+.footer b { color: #fff; }
+
+@media (max-width: 760px) {
+  .two { grid-template-columns: 1fr; gap: 32px; }
+  .menu a { padding: 8px 10px; font-size: .9rem; }
+  .logo { font-size: 1.15rem; }
+  .jobs { grid-template-columns: 1fr; }
+  .section { padding: 64px 0; }
+}

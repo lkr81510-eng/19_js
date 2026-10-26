@@ -1,0 +1,78 @@
+ 1  <!DOCTYPE html>
+ 2  <html lang="ko">
+ 3  <head>
+ 4    <meta charset="UTF-8">
+ 5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 6    <title>MoveAX (무브에이엑스) - AI·자동화 기반 스마트 물류</title>
+ 7    <link rel="stylesheet" href="css/styless.css">
+ 8  </head>
+ 9  <body>
+10    <header class="header">
+11      <div class="container nav">
+12        <a href="index.html" class="logo">Move<span>AX</span></a>
+13        <nav class="menu">
+14          <a href="index.html" class="active">홈</a>
+15          <a href="recruit.html">모집요강</a>
+16          <a href="apply.html">지원</a>
+17          <a href="about.html">About</a>
+18        </nav>
+19      </div>
+20    </header>
+21
+22    <!-- 1. 첫 화면: 한 줄 메시지 + 버튼 하나 -->
+23    <section class="hero">
+24      <div class="container">
+25        <h1>주문부터 도착까지,<br>AI가 움직이는 물류</h1>
+26        <a href="recruit.html" class="btn">채용 공고 보기</a>
+27      </div>
+28    </section>
+29
+30    <!-- 2. 회사 소개 -->
+31    <section class="section" id="intro">
+32      <div class="container two">
+33        <div>
+34          <p class="eyebrow">COMPANY</p>
+35          <h2 class="title">MoveAX는 물류의 방식을 바꿉니다</h2>
+36          <p class="lead">MoveAX(무브에이엑스)는 AI와 자동화 기술로 주문 접수, 재고, 배차, 배송까지 하나의 흐름으로 연결하는 스마트 물류 기업입니다. 사람은 판단에, 기계는 반복에 집중하는 물류 현장을 만듭니다.</p>
+37        </div>
+38        <div class="stats">
+39          <div class="stat"><b>98.7%</b><span>정시 도착률</span></div>
+40          <div class="stat"><b>35%</b><span>배송 리드타임 단축</span></div>
+41          <div class="stat"><b>12곳</b><span>자동화 물류센터</span></div>
+42          <div class="stat"><b>24/7</b><span>AI 관제 운영</span></div>
+43        </div>
+44      </div>
+45    </section>
+46
+47    <!-- 3. 사업 -->
+48    <section class="section soft" id="business">
+49      <div class="container">
+50        <p class="eyebrow">BUSINESS</p>
+51        <h2 class="title">우리가 하는 일</h2>
+52        <div class="cards">
+53          <div class="card"><div class="icon">🤖</div><h3>AI 배차·경로 최적화</h3><p>수요 예측과 실시간 교통 데이터로 최적의 차량과 경로를 자동 배정합니다.</p></div>
+54          <div class="card"><div class="icon">🏭</div><h3>스마트 물류센터 운영</h3><p>피킹·분류 로봇과 WMS로 입고부터 출고까지 센터를 자동화합니다.</p></div>
+55          <div class="card"><div class="icon">📦</div><h3>통합 물류 플랫폼</h3><p>주문·재고·배송 현황을 한 화면에서 추적하는 고객사 전용 플랫폼을 제공합니다.</p></div>
+56        </div>
+57      </div>
+58    </section>
+59
+60    <!-- 4. 채용 -->
+61    <section class="cta-band" id="career">
+62      <div class="container">
+63        <p class="eyebrow" style="color:var(--cyan)">CAREERS</p>
+64        <h2>함께 물류를 움직일 사람을 찾습니다</h2>
+65        <p>운영관리 · 물류 IT 개발 · 배차 · 영업 · 현장 관리자</p>
+66        <a href="recruit.html" class="btn">모집요강 확인하기</a>
+67      </div>
+68    </section>
+69
+70    <footer class="footer">
+71      <div class="container">
+72        <p><b>MoveAX (무브에이엑스)</b> · AI·자동화 기반 스마트 물류</p>
+73        <p>서울특별시 강서구 마곡중앙로 100 · recruit@moveax.example · 02-000-0000</p>
+74        <p>© 2026 MoveAX. All rights reserved.</p>
+75      </div>
+76    </footer>
+77  </body>
+78  </html>
