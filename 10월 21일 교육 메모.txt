@@ -294,6 +294,7 @@ About: 연혁, 비전, 조직, 오시는 길을 어떻게 나눴는지
 
 
 3. github에 올리기
+햣 
 
 1) git init (아래 채팅창에)
 2) git add .
@@ -316,6 +317,15 @@ About: 연혁, 비전, 조직, 오시는 길을 어떻게 나눴는지
 5. 과제 올리기
 
 ㅁ https://lkr81510-eng.github.io/company_recurit/
+
+
+1026 수업내용
+
+1. js : 자바 스크립트의 확장자
+2. // : 주석 (컨틀롤+/)
+3. console.org( ) -->print
+
+
 
 
 
