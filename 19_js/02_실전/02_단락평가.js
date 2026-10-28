@@ -75,5 +75,5 @@
 
 // console.log(calcA() || calcB());
 
-const name = "이정환" || undefined;
-console.log(name);
+// const name = "이정환" || undefined;
+// console.log(name);
