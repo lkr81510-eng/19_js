@@ -26,26 +26,48 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-text">
-        <h1>내가 배운 AI 용어와<br>프롬프트를 한곳에</h1>
+        <span class="eyebrow"><i></i>나만의 AI 학습 노트</span>
+        <h1>내가 배운 <em>AI 용어</em>와<br><em>프롬프트</em>를 한곳에</h1>
         <p>용어는 내 말로 정리하고, 자주 쓰는 프롬프트는 저장해 두세요. 필요할 때 바로 찾아 복사할 수 있어요.</p>
         <div class="hero-actions">
-          <a href="#note-list" class="btn-link primary">노트 둘러보기</a>
-          <a href="search.html" class="btn-link">용어 검색하기</a>
+          <a href="#notes" class="btn-link primary">노트 둘러보기 →</a>
+          <a href="search.html" class="btn-link ghost">용어 검색하기</a>
         </div>
+        <!-- 작은 안내 칩 -->
+        <ul class="chips">
+          <li>✓ 회원가입 없음</li>
+          <li>✓ 내 브라우저에 저장</li>
+          <li>✓ 프롬프트 한 번에 복사</li>
+        </ul>
       </div>
 
       <!-- 통계 바: 노트를 추가/삭제하면 숫자가 갱신됩니다 -->
       <div class="stats-panel">
-        <div class="stat total"><strong id="stat-total">0</strong><span>전체 노트</span></div>
-        <div class="stat term"><strong id="stat-term">0</strong><span>용어</span></div>
-        <div class="stat prompt"><strong id="stat-prompt">0</strong><span>프롬프트</span></div>
+        <div class="stat total">
+          <span class="stat-icon">📚</span>
+          <div><strong id="stat-total">0</strong><span>전체 노트</span></div>
+          <!-- 용어/프롬프트 비율을 보여 주는 막대 (notes.js가 너비를 정합니다) -->
+          <div class="ratio" title="용어와 프롬프트 비율"><i id="bar-term"></i><i id="bar-prompt"></i></div>
+        </div>
+        <div class="stat term">
+          <span class="stat-icon">💡</span>
+          <div><strong id="stat-term">0</strong><span>용어</span></div>
+        </div>
+        <div class="stat prompt">
+          <span class="stat-icon">✍️</span>
+          <div><strong id="stat-prompt">0</strong><span>프롬프트</span></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- AI 용어 카드: 색 카드 + 큰 글자 + 일러스트(직접 그린 SVG) -->
   <section class="wrap showcase">
-    <h2 class="showcase-title">AI 용어 카드</h2>
+    <div class="section-head">
+      <span class="section-tag">LEARN</span>
+      <h2 class="showcase-title">AI 용어 카드</h2>
+      <p>처음 배울 때 알아 두면 좋은 기본 용어예요.</p>
+    </div>
     <div class="term-cards">
 
       <article class="term-card green">
@@ -118,10 +140,11 @@
     </div>
   </section>
 
-  <main class="page-main">
+  <main class="page-main" id="notes">
     <!-- 목록 머리말: 왼쪽 제목, 오른쪽 추가 버튼 -->
     <div class="page-head">
       <div>
+        <span class="section-tag">MY NOTES</span>
         <h2>내 노트</h2>
         <p>배운 용어와 프롬프트를 모아 두는 곳입니다.</p>
       </div>
@@ -152,8 +175,9 @@
 
     <!-- 검색창: 입력하는 즉시 아래 목록이 걸러집니다 (notes.js) -->
     <div class="searchbar">
-      <span class="searchbar-icon">🔍</span>
+      <svg class="searchbar-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
       <input type="search" id="note-search" placeholder="노트 제목 또는 내용 검색...">
+      <kbd class="searchbar-kbd">/</kbd>
     </div>
 
     <!-- 필터 버튼 -->

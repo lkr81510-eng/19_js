@@ -115,10 +115,40 @@ searchInput.addEventListener("input", function () {
 
 // ----- 통계 바 갱신 (전체 노트 기준, 필터/검색과 무관) -----
 function updateStats() {
-  statTotal.textContent = notes.length;
-  statTerm.textContent = notes.filter(function (n) { return n.type === "용어"; }).length;
-  statPrompt.textContent = notes.filter(function (n) { return n.type === "프롬프트"; }).length;
+  const termCount = notes.filter(function (n) { return n.type === "용어"; }).length;
+  const promptCount = notes.length - termCount;
+
+  countUp(statTotal, notes.length);
+  countUp(statTerm, termCount);
+  countUp(statPrompt, promptCount);
+
+  // 용어/프롬프트 비율 막대 (노트가 없으면 0%)
+  const total = notes.length || 1;
+  document.getElementById("bar-term").style.width = (termCount / total) * 100 + "%";
+  document.getElementById("bar-prompt").style.width = (promptCount / total) * 100 + "%";
 }
+
+// 숫자가 현재 값에서 새 값까지 부드럽게 올라가거나 내려가게 합니다.
+function countUp(element, target) {
+  const from = Number(element.textContent) || 0;
+  if (from === target) return;
+  const steps = 12;
+  let step = 0;
+  const timer = setInterval(function () {
+    step++;
+    element.textContent = Math.round(from + ((target - from) * step) / steps);
+    if (step >= steps) clearInterval(timer);
+  }, 25);
+}
+
+// ----- 키보드 단축키: "/" 를 누르면 검색창으로 이동 -----
+document.addEventListener("keydown", function (event) {
+  const typing = ["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName);
+  if (event.key === "/" && !typing) {
+    event.preventDefault();
+    searchInput.focus();
+  }
+});
 
 // ----- 목록 그리기 -----
 function render() {
@@ -139,15 +169,33 @@ function render() {
     // 노트가 하나도 없을 때와, 검색/필터 결과만 없을 때 문구를 다르게 보여 줍니다.
     const none = notes.length === 0;
     listEl.innerHTML =
-      '<div class="empty"><div class="empty-icon">📖</div>' +
-      "<h3>" + (none ? "등록된 노트가 없습니다" : "조건에 맞는 노트가 없습니다") + "</h3>" +
-      "<p>" + (none ? "위의 '노트 추가' 버튼으로 첫 노트를 남겨 보세요." : "검색어나 필터를 바꿔 보세요.") + "</p></div>";
+      '<div class="empty"><svg class="empty-art" viewBox="0 0 120 90" aria-hidden="true">' +
+      '<rect x="14" y="10" width="92" height="66" rx="10" fill="#22304a"/>' +
+      '<rect x="26" y="24" width="44" height="6" rx="3" fill="#3b82f6"/>' +
+      '<rect x="26" y="38" width="68" height="5" rx="2.5" fill="#3a4b69"/>' +
+      '<rect x="26" y="50" width="56" height="5" rx="2.5" fill="#3a4b69"/>' +
+      '<circle cx="94" cy="66" r="16" fill="#17202f" stroke="#22d3ee" stroke-width="3"/>' +
+      '<line x1="86" y1="66" x2="102" y2="66" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>' +
+      "</svg>" +
+      "<h3>" + (none ? "아직 노트가 없어요" : "조건에 맞는 노트가 없어요") + "</h3>" +
+      "<p>" + (none ? "배운 용어나 자주 쓰는 프롬프트를 첫 노트로 남겨 보세요." : "검색어나 필터를 바꿔 보세요.") + "</p>" +
+      (none ? '<button type="button" class="btn small" id="empty-add">첫 노트 쓰기</button>' : "") +
+      "</div>";
+    // 빈 화면의 버튼은 위쪽 "노트 추가" 버튼과 같은 동작
+    const emptyAdd = document.getElementById("empty-add");
+    if (emptyAdd) {
+      emptyAdd.addEventListener("click", function () {
+        if (form.hidden) document.getElementById("toggle-form").click();
+        form.scrollIntoView({ behavior: "smooth" });
+      });
+    }
     return;
   }
 
   visible.forEach(function (note) {
     const card = document.createElement("article");
-    card.className = "card note";
+    // 종류별로 왼쪽 띠 색이 달라지도록 클래스를 붙입니다.
+    card.className = "card note " + (note.type === "프롬프트" ? "is-prompt" : "is-term");
     if (note.id === editingId) {
       renderEditMode(card, note);
     } else {

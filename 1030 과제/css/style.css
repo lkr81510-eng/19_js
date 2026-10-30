@@ -302,3 +302,239 @@ textarea { resize: vertical; }
 .term-card h3 { position: relative; margin: 0; font-size: 24px; }
 .term-card .en { position: relative; margin: 2px 0 8px; font-weight: bold; font-size: 14px; }
 .term-card .desc { position: relative; margin: 0; font-size: 14px; opacity: 0.9; }
+
+/* =====================================================
+   디테일 다듬기 (1페이지 중심)
+   ===================================================== */
+
+/* ----- 상단 바: 스크롤해도 위에 고정 + 살짝 흐린 유리 느낌 ----- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(23, 32, 47, 0.8);
+  backdrop-filter: blur(10px);
+}
+.brand-icon { box-shadow: 0 4px 14px rgba(34, 211, 238, 0.35); }
+.nav { background: rgba(255, 255, 255, 0.04); padding: 4px; border-radius: 12px; }
+.nav a { padding: 6px 16px; }
+
+/* ----- 히어로: 은은한 빛 번짐 + 격자 무늬 배경 ----- */
+.hero { position: relative; overflow: hidden; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(520px 280px at 12% 15%, rgba(59, 130, 246, 0.22), transparent 70%),
+    radial-gradient(480px 260px at 88% 70%, rgba(34, 211, 238, 0.16), transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  /* 가장자리로 갈수록 격자가 옅어지도록 */
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--cyan);
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  border-radius: 999px;
+}
+.eyebrow i {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 8px rgba(34, 211, 238, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+}
+
+.hero-text h1 { letter-spacing: -0.02em; }
+.hero-text h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, #60a5fa, var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 히어로 버튼 */
+.btn-link.primary { box-shadow: 0 8px 22px rgba(59, 130, 246, 0.35); transition: transform 0.15s, box-shadow 0.15s; }
+.btn-link.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(59, 130, 246, 0.45); }
+.btn-link.ghost { border: 1px solid var(--line); }
+.btn-link.ghost:hover { border-color: #5a6c88; }
+
+/* 안내 칩 */
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 22px 0 0; }
+.chips li {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ----- 통계 패널: 아이콘 + 숫자 + 비율 막대 ----- */
+.stats-panel { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35); backdrop-filter: blur(6px); }
+.stat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.stat:hover { transform: translateY(-3px); border-color: #4a5d7c; }
+.stat::before { /* 카드 윗부분의 얇은 색 띠 */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--blue);
+}
+.stat.term::before { background: var(--cyan); }
+.stat.prompt::before { background: var(--green); }
+.stat .stat-icon {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  font-size: 22px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.15);
+  color: inherit;
+}
+.stat.term .stat-icon { background: rgba(34, 211, 238, 0.15); }
+.stat.prompt .stat-icon { background: rgba(52, 211, 153, 0.15); }
+.stat strong { font-size: 30px; }
+.stat > div:not(.ratio) span { display: block; }
+
+/* 용어(청록) / 프롬프트(초록) 비율 막대 */
+.ratio { flex-basis: 100%; height: 8px; display: flex; border-radius: 999px; overflow: hidden; background: var(--line); }
+.ratio i { display: block; height: 100%; width: 0; transition: width 0.5s ease; }
+#bar-term { background: var(--cyan); }
+#bar-prompt { background: var(--green); }
+
+/* ----- 섹션 머리말 ----- */
+.section-head { margin-bottom: 18px; }
+.section-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.14em;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+.section-head p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.showcase { padding-top: 24px; }
+.showcase-title { margin: 0; font-size: 26px; }
+
+/* ----- 용어 카드: 마우스를 올리면 살짝 떠오름 ----- */
+.term-card {
+  min-height: 310px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.term-card:hover { transform: translateY(-6px) rotate(-0.6deg); box-shadow: 0 18px 36px rgba(0, 0, 0, 0.42); }
+.term-card svg { transition: transform 0.3s ease; }
+.term-card:hover svg { transform: scale(1.06); }
+.term-card.green { background: linear-gradient(160deg, #489a66, #357a4f); }
+.term-card.blue { background: linear-gradient(160deg, #6786aa, #4f6d8f); }
+.term-card .en { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; }
+
+/* ----- 노트 머리말 / 검색창 ----- */
+.page-main { padding-top: 28px; }
+.page-head { padding-top: 28px; border-top: 1px solid var(--line); }
+.page-head h2 { font-size: 26px; }
+.page-head .btn { box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3); }
+
+.searchbar { color: var(--muted); }
+.searchbar-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0.8; }
+.searchbar input[type="search"] {
+  padding: 14px 48px 14px 46px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.searchbar input[type="search"]:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18); }
+.searchbar-kbd {
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  min-width: 24px;
+  text-align: center;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-bottom-width: 3px;
+  border-radius: 6px;
+}
+/* 노트 추가 폼이 펼쳐질 때 */
+#note-form { border-left: 4px solid var(--blue); animation: slideDown 0.25s ease; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* ----- 필터 알약 ----- */
+.filter { transition: all 0.15s; }
+.filter:hover { color: var(--text); border-color: #5a6c88; }
+
+/* ----- 노트 카드: 종류별 왼쪽 띠 + 호버 효과 ----- */
+.note { position: relative; border-left: 4px solid var(--line); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+.note.is-term { border-left-color: var(--cyan); }
+.note.is-prompt { border-left-color: var(--green); }
+.note:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3); }
+.note h3 { font-size: 18px; margin: 8px 0 6px; }
+.note .content { color: #cbd5e1; }
+.note .date { padding-top: 8px; border-top: 1px dashed var(--line); margin-top: 10px; }
+
+/* ----- 빈 화면 ----- */
+.empty { border: 1px dashed var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.02); }
+.empty-art { width: 140px; height: auto; margin-bottom: 4px; }
+.empty .btn { margin-top: 16px; }
+
+/* ----- 페이지가 열릴 때 부드럽게 나타나기 ----- */
+.hero-text, .stats-panel { animation: fadeUp 0.6s ease both; }
+.stats-panel { animation-delay: 0.12s; }
+.term-card { animation: fadeUp 0.6s ease both; }
+.term-card:nth-child(2) { animation-delay: 0.08s; }
+.term-card:nth-child(3) { animation-delay: 0.16s; }
+.term-card:nth-child(4) { animation-delay: 0.24s; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* 움직임을 줄이도록 설정한 사용자는 애니메이션 끄기 */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ----- 모바일 보정 ----- */
+@media (max-width: 800px) {
+  .page-head { flex-wrap: wrap; }
+}
+
+/* 검색 페이지의 예시 카드는 세로 배치 유지 */
+.tips .stat { display: block; }
+
+/* 히어로 버튼과 그 아래 검색 폼 사이 간격 */
+.hero-actions + .row { margin-top: 20px; }

@@ -59,22 +59,9 @@ async function search(keyword) {
     }
 
     messageEl.textContent = "";
-    items.forEach(function (item) {
-      const card = document.createElement("article");
-      card.className = "card clickable result";
-
-      const h3 = document.createElement("h3");
-      h3.textContent = item.title;
-      const p = document.createElement("p");
-      p.textContent = stripTags(item.snippet) + "…";
-
-      card.append(h3, p);
-      // 카드를 누르면 상세 내용을 불러옵니다.
-      card.addEventListener("click", function () {
-        showDetail(item.pageid);
-      });
-      resultsEl.appendChild(card);
-    });
+    renderResults(items);
+    // 새 검색이 성공했으니 검색어와 결과를 저장합니다. (이전 상세 내용은 지움)
+    saveState({ query: keyword, items: items, detail: null });
   } catch (error) {
     messageEl.textContent = "검색에 실패했습니다. 잠시 후 다시 시도해 주세요.";
     console.error(error);
@@ -103,6 +90,38 @@ async function showDetail(pageid) {
     const data = await response.json();
     const page = data.query.pages[pageid];
 
+    renderDetail(page);
+    saveState({ detail: page }); // 열어 본 문서도 기억
+  } catch (error) {
+    detailEl.innerHTML = '<p class="message">상세 내용을 불러오지 못했습니다.</p>';
+    console.error(error);
+  }
+}
+
+// 검색 결과 카드 목록을 화면에 그립니다. (검색 직후, 저장된 결과 복원 때 같이 사용)
+function renderResults(items) {
+  resultsEl.innerHTML = "";
+  items.forEach(function (item) {
+    const card = document.createElement("article");
+    card.className = "card clickable result";
+
+    const h3 = document.createElement("h3");
+    h3.textContent = item.title;
+    const p = document.createElement("p");
+    p.textContent = stripTags(item.snippet) + "…";
+
+    card.append(h3, p);
+    // 카드를 누르면 상세 내용을 불러옵니다.
+    card.addEventListener("click", function () {
+      showDetail(item.pageid);
+    });
+    resultsEl.appendChild(card);
+  });
+}
+
+// 문서 상세 카드를 그립니다.
+function renderDetail(page) {
+  {
     detailEl.innerHTML = "";
     const card = document.createElement("article");
     card.className = "card detail";
@@ -132,11 +151,39 @@ async function showDetail(pageid) {
     card.append(link);
 
     detailEl.appendChild(card);
-  } catch (error) {
-    detailEl.innerHTML = '<p class="message">상세 내용을 불러오지 못했습니다.</p>';
-    console.error(error);
   }
 }
+
+// ----- 마지막 검색 기억하기 (localStorage) -----
+// 검색어, 결과 목록, 열어 본 문서를 저장해 두었다가
+// 다른 페이지에 갔다 오거나 새로고침해도 그대로 다시 보여 줍니다.
+const SEARCH_KEY = "lastSearch";
+
+function saveState(changes) {
+  try {
+    const saved = JSON.parse(localStorage.getItem(SEARCH_KEY)) || {};
+    localStorage.setItem(SEARCH_KEY, JSON.stringify(Object.assign(saved, changes)));
+  } catch (e) {
+    // 저장 공간을 못 쓰는 환경이어도 검색 자체는 계속 동작합니다.
+  }
+}
+
+function restoreState() {
+  let saved;
+  try {
+    saved = JSON.parse(localStorage.getItem(SEARCH_KEY));
+  } catch (e) {
+    return;
+  }
+  if (!saved || !saved.items || saved.items.length === 0) return;
+
+  queryInput.value = saved.query;
+  renderResults(saved.items);
+  if (saved.detail) renderDetail(saved.detail);
+}
+
+// 페이지를 열면 이전 검색 내용을 먼저 복원합니다.
+restoreState();
 
 // ----- 하단 안내 배너: 한 번 확인하면 다시 보이지 않게 기억 -----
 const noticeEl = document.getElementById("notice");
