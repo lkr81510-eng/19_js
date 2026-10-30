@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 노트</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 상단 바: 왼쪽 로고, 가운데 메뉴 (두 페이지를 오가는 링크) -->
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">N</span>
+        <span class="brand-name">AI<b>노트</b></span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="active">홈</a>
+        <a href="search.html">용어 검색</a>
+      </nav>
+      <span class="topbar-side"></span>
+    </div>
+  </header>
+
+  <!-- 히어로: 왼쪽 소개 + 검색창, 오른쪽 통계 패널 -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <h1>내가 배운 AI 용어와<br>프롬프트를 한곳에</h1>
+        <p>용어는 내 말로 정리하고, 자주 쓰는 프롬프트는 저장해 두세요. 필요할 때 바로 찾아 복사할 수 있어요.</p>
+        <div class="hero-actions">
+          <a href="#note-list" class="btn-link primary">노트 둘러보기</a>
+          <a href="search.html" class="btn-link">용어 검색하기</a>
+        </div>
+      </div>
+
+      <!-- 통계 바: 노트를 추가/삭제하면 숫자가 갱신됩니다 -->
+      <div class="stats-panel">
+        <div class="stat total"><strong id="stat-total">0</strong><span>전체 노트</span></div>
+        <div class="stat term"><strong id="stat-term">0</strong><span>용어</span></div>
+        <div class="stat prompt"><strong id="stat-prompt">0</strong><span>프롬프트</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI 용어 카드: 색 카드 + 큰 글자 + 일러스트(직접 그린 SVG) -->
+  <section class="wrap showcase">
+    <h2 class="showcase-title">AI 용어 카드</h2>
+    <div class="term-cards">
+
+      <article class="term-card green">
+        <span class="big-letter">A</span>
+        <svg viewBox="0 0 200 140" role="img" aria-label="로봇 얼굴 일러스트">
+          <line x1="100" y1="14" x2="100" y2="32" stroke="#f4e9d8" stroke-width="4"/>
+          <circle cx="100" cy="12" r="6" fill="#f2b84b"/>
+          <rect x="52" y="32" width="96" height="78" rx="20" fill="#e9825f"/>
+          <circle cx="80" cy="64" r="12" fill="#f4e9d8"/><circle cx="120" cy="64" r="12" fill="#f4e9d8"/>
+          <circle cx="82" cy="66" r="5" fill="#2d3b4f"/><circle cx="118" cy="66" r="5" fill="#2d3b4f"/>
+          <rect x="76" y="86" width="48" height="8" rx="4" fill="#f4e9d8"/>
+          <rect x="38" y="58" width="10" height="26" rx="5" fill="#f2b84b"/><rect x="152" y="58" width="10" height="26" rx="5" fill="#f2b84b"/>
+        </svg>
+        <h3>인공지능</h3>
+        <p class="en">Artificial Intelligence</p>
+        <p class="desc">데이터와 경험을 통해 스스로 학습하는 기술</p>
+      </article>
+
+      <article class="term-card green">
+        <span class="big-letter">P</span>
+        <svg viewBox="0 0 200 140" role="img" aria-label="말풍선 일러스트">
+          <rect x="22" y="20" width="110" height="46" rx="14" fill="#f4e9d8"/>
+          <polygon points="44,66 44,84 62,66" fill="#f4e9d8"/>
+          <rect x="38" y="34" width="70" height="6" rx="3" fill="#8aa89a"/><rect x="38" y="48" width="48" height="6" rx="3" fill="#8aa89a"/>
+          <rect x="70" y="78" width="110" height="46" rx="14" fill="#e9825f"/>
+          <polygon points="156,124 156,138 140,124" fill="#e9825f"/>
+          <rect x="86" y="92" width="70" height="6" rx="3" fill="#f4e9d8"/><rect x="86" y="106" width="30" height="6" rx="3" fill="#f4e9d8"/>
+          <rect x="120" y="104" width="4" height="12" fill="#f2b84b"/>
+        </svg>
+        <h3>프롬프트</h3>
+        <p class="en">Prompt</p>
+        <p class="desc">AI에게 일을 시키려고 입력하는 지시문</p>
+      </article>
+
+      <article class="term-card blue">
+        <span class="big-letter">T</span>
+        <svg viewBox="0 0 200 140" role="img" aria-label="토큰 블록 일러스트">
+          <rect x="18" y="26" width="52" height="34" rx="9" fill="#f2b84b"/>
+          <rect x="78" y="26" width="34" height="34" rx="9" fill="#e9825f"/>
+          <rect x="120" y="26" width="62" height="34" rx="9" fill="#f4e9d8"/>
+          <rect x="34" y="70" width="40" height="34" rx="9" fill="#e9825f"/>
+          <rect x="82" y="70" width="64" height="34" rx="9" fill="#f4e9d8"/>
+          <rect x="154" y="70" width="28" height="34" rx="9" fill="#f2b84b"/>
+          <rect x="28" y="38" width="32" height="5" rx="2" fill="#2d3b4f" opacity=".5"/>
+          <rect x="130" y="38" width="42" height="5" rx="2" fill="#2d3b4f" opacity=".5"/>
+          <rect x="92" y="82" width="44" height="5" rx="2" fill="#2d3b4f" opacity=".5"/>
+        </svg>
+        <h3>토큰</h3>
+        <p class="en">Token</p>
+        <p class="desc">AI가 글을 잘게 쪼개 읽는 최소 단위</p>
+      </article>
+
+      <article class="term-card blue">
+        <span class="big-letter">N</span>
+        <svg viewBox="0 0 200 140" role="img" aria-label="신경망 일러스트">
+          <g stroke="#f4e9d8" stroke-width="2" opacity=".7">
+            <line x1="35" y1="35" x2="100" y2="25"/><line x1="35" y1="35" x2="100" y2="70"/><line x1="35" y1="35" x2="100" y2="115"/>
+            <line x1="35" y1="105" x2="100" y2="25"/><line x1="35" y1="105" x2="100" y2="70"/><line x1="35" y1="105" x2="100" y2="115"/>
+            <line x1="100" y1="25" x2="165" y2="70"/><line x1="100" y1="70" x2="165" y2="70"/><line x1="100" y1="115" x2="165" y2="70"/>
+          </g>
+          <circle cx="35" cy="35" r="11" fill="#f2b84b"/><circle cx="35" cy="105" r="11" fill="#f2b84b"/>
+          <circle cx="100" cy="25" r="11" fill="#e9825f"/><circle cx="100" cy="70" r="11" fill="#e9825f"/><circle cx="100" cy="115" r="11" fill="#e9825f"/>
+          <circle cx="165" cy="70" r="13" fill="#f4e9d8"/>
+        </svg>
+        <h3>신경망</h3>
+        <p class="en">Neural network</p>
+        <p class="desc">뇌의 신경세포를 본뜬 연결 구조의 모델</p>
+      </article>
+
+    </div>
+  </section>
+
+  <main class="page-main">
+    <!-- 목록 머리말: 왼쪽 제목, 오른쪽 추가 버튼 -->
+    <div class="page-head">
+      <div>
+        <h2>내 노트</h2>
+        <p>배운 용어와 프롬프트를 모아 두는 곳입니다.</p>
+      </div>
+      <button type="button" id="toggle-form" class="btn">＋ 노트 추가</button>
+    </div>
+
+    <!-- 노트 추가 폼 (버튼을 누르면 펼쳐집니다) -->
+    <form id="note-form" class="card" hidden>
+      <label for="type">종류</label>
+      <select id="type">
+        <option value="용어">용어</option>
+        <option value="프롬프트">프롬프트</option>
+      </select>
+
+      <!-- 종류에 따라 라벨 문구가 바뀝니다 (notes.js) -->
+      <label for="title" id="title-label">용어 *</label>
+      <input type="text" id="title" placeholder="예: 트랜스포머">
+
+      <label for="content" id="content-label">내 말로 정리한 설명 *</label>
+      <textarea id="content" rows="4"></textarea>
+
+      <label for="memo">메모</label>
+      <input type="text" id="memo" placeholder="참고할 점, 출처 등 (선택)">
+
+      <p id="message" class="message"></p>
+      <button type="submit" class="btn">노트 추가</button>
+    </form>
+
+    <!-- 검색창: 입력하는 즉시 아래 목록이 걸러집니다 (notes.js) -->
+    <div class="searchbar">
+      <span class="searchbar-icon">🔍</span>
+      <input type="search" id="note-search" placeholder="노트 제목 또는 내용 검색...">
+    </div>
+
+    <!-- 필터 버튼 -->
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="전체">전체</button>
+      <button class="filter" data-filter="용어">용어</button>
+      <button class="filter" data-filter="프롬프트">프롬프트</button>
+    </div>
+
+    <!-- 노트 목록 -->
+    <section id="note-list" class="note-grid"></section>
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-icon">N</span>
+          <span class="brand-name">AI<b>노트</b></span>
+        </a>
+        <p>AI 용어와 프롬프트를 기록하는<br>나만의 학습 노트</p>
+      </div>
+      <div class="footer-col">
+        <h4>메뉴</h4>
+        <a href="index.html">홈</a>
+        <a href="search.html">용어 검색</a>
+      </div>
+      <div class="footer-col">
+        <h4>기능</h4>
+        <a href="index.html">용어 기록</a>
+        <a href="index.html">프롬프트 저장</a>
+        <a href="search.html">위키백과 검색</a>
+      </div>
+      <div class="footer-col">
+        <h4>정보</h4>
+        <span>데이터는 이 브라우저에만 저장돼요</span>
+        <span>검색: 한국어 위키백과 API</span>
+      </div>
+    </div>
+    <p class="copyright">© 2026 AI 노트. 개인 학습 기록용 프로젝트.</p>
+  </footer>
+
+  <!-- 하단 안내 배너: 확인을 누르면 사라지고 다시 나오지 않습니다 (notes.js) -->
+  <div class="notice" id="notice" hidden>
+    <p>이 웹사이트의 노트는 서버가 아니라 이 브라우저(localStorage)에만 저장됩니다. 브라우저 데이터를 지우면 노트도 함께 사라져요.</p>
+    <button type="button" id="notice-ok" class="btn small">확인</button>
+  </div>
+
+  <script src="js/notes.js"></script>
+</body>
+</html>

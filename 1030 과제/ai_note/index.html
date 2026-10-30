@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 노트</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 두 페이지 공통 상단 메뉴 -->
+  <nav class="nav">
+    <a href="index.html" class="active">🤖 AI 노트</a>
+    <a href="search.html">🔍 용어 검색</a>
+  </nav>
+
+  <main class="container">
+    <h1>AI 노트</h1>
+
+    <!-- 노트 추가 폼 -->
+    <form id="note-form" class="card">
+      <label for="type">종류</label>
+      <select id="type">
+        <option value="용어">용어</option>
+        <option value="프롬프트">프롬프트</option>
+      </select>
+
+      <!-- 종류에 따라 라벨 문구가 바뀝니다 (notes.js) -->
+      <label for="title" id="title-label">용어 *</label>
+      <input type="text" id="title" placeholder="예: 트랜스포머">
+
+      <label for="content" id="content-label">내 말로 정리한 설명 *</label>
+      <textarea id="content" rows="4"></textarea>
+
+      <label for="memo">메모</label>
+      <input type="text" id="memo" placeholder="참고할 점, 출처 등 (선택)">
+
+      <p id="message" class="message"></p>
+      <button type="submit" class="btn">노트 추가</button>
+    </form>
+
+    <!-- 필터 버튼 -->
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="전체">전체</button>
+      <button class="filter" data-filter="용어">용어</button>
+      <button class="filter" data-filter="프롬프트">프롬프트</button>
+    </div>
+
+    <!-- 노트 목록 -->
+    <section id="note-list"></section>
+  </main>
+
+  <script src="js/notes.js"></script>
+</body>
+</html>

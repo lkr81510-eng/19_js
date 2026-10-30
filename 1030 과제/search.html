@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>용어 검색 · AI 노트</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">N</span>
+        <span class="brand-name">AI<b>노트</b></span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">홈</a>
+        <a href="search.html" class="active">용어 검색</a>
+      </nav>
+      <span class="topbar-side"></span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <h1>모르는 AI 용어,<br>바로 찾아보세요</h1>
+        <p>한국어 위키백과에서 용어를 검색하고, 요약과 원문 링크를 확인할 수 있어요.</p>
+        <div class="hero-actions">
+          <a href="index.html" class="btn-link primary">내 노트 보기</a>
+        </div>
+        <form id="search-form" class="row">
+          <input type="text" id="query" placeholder="검색어 (예: 인공지능)">
+          <button type="submit" class="btn">검색</button>
+        </form>
+      </div>
+
+      <div class="stats-panel tips">
+        <div class="stat total"><span>검색 예시</span><strong>인공지능</strong></div>
+        <div class="stat term"><strong>트랜스포머</strong></div>
+        <div class="stat prompt"><strong>머신 러닝</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="page-main narrow">
+    <p id="search-message" class="message"></p>
+
+    <!-- 검색 결과 목록 -->
+    <section id="results"></section>
+
+    <!-- 선택한 문서의 상세 내용 -->
+    <section id="detail"></section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-icon">N</span>
+          <span class="brand-name">AI<b>노트</b></span>
+        </a>
+        <p>AI 용어와 프롬프트를 기록하는<br>나만의 학습 노트</p>
+      </div>
+      <div class="footer-col">
+        <h4>메뉴</h4>
+        <a href="index.html">홈</a>
+        <a href="search.html">용어 검색</a>
+      </div>
+      <div class="footer-col">
+        <h4>기능</h4>
+        <a href="index.html">용어 기록</a>
+        <a href="index.html">프롬프트 저장</a>
+        <a href="search.html">위키백과 검색</a>
+      </div>
+      <div class="footer-col">
+        <h4>정보</h4>
+        <span>데이터는 이 브라우저에만 저장돼요</span>
+        <span>검색: 한국어 위키백과 API</span>
+      </div>
+    </div>
+    <p class="copyright">© 2026 AI 노트. 개인 학습 기록용 프로젝트.</p>
+  </footer>
+
+  <div class="notice" id="notice" hidden>
+    <p>이 웹사이트의 노트는 서버가 아니라 이 브라우저(localStorage)에만 저장됩니다. 브라우저 데이터를 지우면 노트도 함께 사라져요.</p>
+    <button type="button" id="notice-ok" class="btn small">확인</button>
+  </div>
+
+  <script src="js/search.js"></script>
+</body>
+</html>
