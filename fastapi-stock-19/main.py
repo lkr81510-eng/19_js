@@ -1,7 +1,15 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import yfinance as yf
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://fastapi-stock-react-19-two.vercel.app"],
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
