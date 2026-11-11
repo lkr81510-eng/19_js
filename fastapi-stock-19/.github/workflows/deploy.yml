@@ -1,0 +1,40 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-ec2
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_USER: ${{ secrets.EC2_USER }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH
+        env:
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$EC2_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
+
+      - name: Upload source
+        run: |
+          tar --exclude=.git -czf - . | \
+            ssh -i ~/.ssh/deploy_key "$EC2_USER@$EC2_HOST" \
+            'mkdir -p ~/fastapi-stock-19 && tar -xzf - -C ~/fastapi-stock-19'
+
+      - name: Run deploy script
+        run: ssh -i ~/.ssh/deploy_key "$EC2_USER@$EC2_HOST" 'bash ~/fastapi-stock-19/deploy/deploy.sh'
